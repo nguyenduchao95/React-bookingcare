@@ -4,6 +4,7 @@ import HomeHeader from '../../HomePage/HomeHeader';
 import './DoctorDetail.scss';
 import { getDetailInfoDoctor } from '../../../services/userService';
 import { LANGUAGES } from '../../../utils'
+import DoctorSchedule from './DoctorSchedule';
 
 
 class DetailDoctor extends Component {
@@ -58,6 +59,13 @@ class DetailDoctor extends Component {
                     </div>
 
                     <div className="schedule-doctor">
+                        <div className="content-left">
+                            <DoctorSchedule />
+                        </div>
+
+                        <div className="content-right">
+
+                        </div>
 
                     </div>
 
