@@ -1,0 +1,44 @@
+.manage-doctor-container {
+    .manage-doctor-title {
+        padding: 20px 0;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .more-info {
+        display: flex;
+        gap: 15px;
+        padding-bottom: 15px;
+
+        .content-left {
+            width: 40%;
+        }
+
+        .content-right {
+            width: 60%;
+        }
+    }
+
+    button {
+        margin: 20px 0;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+
+        &.save-content-doctor {
+            background-color: orange;
+        }
+
+        &.create-content-doctor {
+            background-color: rgb(0, 60, 255);
+            color: #fff;
+        }
+
+        &:hover {
+            cursor: pointer;
+            opacity: 0.9;
+        }
+    }
+}

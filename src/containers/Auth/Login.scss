@@ -1,0 +1,72 @@
+.login-background {
+    background: linear-gradient(135deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+    height: 100vh;
+    padding-top: 50px;
+
+    .login-container {
+        width: 300px;
+        height: 450px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 10px;
+
+        .login-content {
+            padding: 20px;
+
+            .text-login {
+                font-size: 30px;
+                text-align: center;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            .form-group {
+                .custom-input-pass {
+                    position: relative;
+
+                    i {
+                        position: absolute;
+                        top: 50%;
+                        right: 5px;
+                        transform: translateY(-50%);
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .btn-login {
+                width: 100%;
+                padding: 8px 0;
+                font-weight: bold;
+                font-size: 16px;
+                color: #fff;
+                border: none;
+                border-radius: 20px;
+                background: linear-gradient(135deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+            }
+
+            .forgot-password {
+                font-size: 13px;
+                padding: 20px 0;
+                text-align: center;
+                color: rgb(0, 116, 248);
+                cursor: pointer;
+            }
+
+            .socials-login {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                p {
+                    margin: 0;
+                }
+
+                span {
+                    margin-left: 10px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
