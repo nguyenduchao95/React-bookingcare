@@ -7,7 +7,6 @@ import * as actions from '../../../store/actions';
 import * as ReactDOM from 'react-dom';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
-
 import 'react-markdown-editor-lite/lib/index.css';
 import Select from 'react-select';
 import { LANGUAGES, CRUD_ACTIONS } from '../../../utils';
