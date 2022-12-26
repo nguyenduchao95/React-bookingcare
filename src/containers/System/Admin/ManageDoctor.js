@@ -15,12 +15,6 @@ import { getDetailInfoDoctor } from '../../../services/userService';
 
 const mdParser = new MarkdownIt();
 
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-];
-
 class ManageDoctor extends Component {
 
     constructor(props) {
@@ -31,12 +25,23 @@ class ManageDoctor extends Component {
             selectedOption: null,
             description: '',
             listDoctors: [],
-            hasOldData: false
+            hasOldData: false,
+
+            listPrice: [],
+            listPayment: [],
+            listProvince: [],
+            selectedPrice: '',
+            selectedPayment: '',
+            selectedProvince: '',
+            nameClinic: '',
+            addressClinic: '',
+            note: ''
         }
     }
 
     componentDidMount() {
         this.props.fetchAllDoctors()
+        this.props.getAllRequiredDoctorInfo()
     }
 
     componentDidUpdate(preProps, preState, snapshot) {
@@ -51,6 +56,10 @@ class ManageDoctor extends Component {
             this.setState({
                 listDoctors: dataSelect
             })
+        }
+
+        if (preProps.allRequiredDoctorInfo !== this.props.allRequiredDoctorInfo) {
+            console.log(this.props.allRequiredDoctorInfo)
         }
     }
 
@@ -119,27 +128,60 @@ class ManageDoctor extends Component {
         let { selectedOption, description, listDoctors, contentMarkdown, hasOldData } = this.state
         return (
             <div className="manage-doctor-container">
-                <div className="manage-doctor-title">Tạo thêm thông tin doctor</div>
+                <div className="manage-doctor-title"><FormattedMessage id="admin.manage-doctor.title" /></div>
                 <div className="more-info">
                     <div className="content-left form-group">
-                        <label className="mb-2">Chọn bác sĩ</label>
+                        <label className="mb-2"><FormattedMessage id="admin.manage-doctor.select-doctor" /></label>
                         <Select
                             value={selectedOption}
                             onChange={this.handleChange}
                             options={listDoctors}
+                            placeholder={'Chọn bác sĩ'}
                         />
                     </div>
 
                     <div className="content-right form-group">
-                        <label className="mb-2">Thông tin giới thiệu:</label>
-                        <textarea className="form-control" rows="4"
+                        <label className="mb-2"><FormattedMessage id="admin.manage-doctor.intro" /></label>
+                        <textarea className="form-control" rows="2"
                             onChange={(event) => this.handleOnChangeDesc(event)}
                             value={description}
                         >
-
                         </textarea>
                     </div>
                 </div>
+
+                <div className="more-info-extra row mb-5">
+                    <div className="col-4 form-group mb-3">
+                        <label className="form-label">Chọn giá</label>
+                        <input className="form-control" />
+                    </div>
+
+                    <div className="col-4 form-group mb-3">
+                        <label className="form-label">Chọn phương thức thanh toán</label>
+                        <input className="form-control" />
+                    </div>
+
+                    <div className="col-4 form-group mb-3">
+                        <label className="form-label">Chọn tỉnh thành</label>
+                        <input className="form-control" />
+                    </div>
+
+                    <div className="col-4 form-group mb-3">
+                        <label className="form-label">Tên phòng khám</label>
+                        <input className="form-control" />
+                    </div>
+
+                    <div className="col-4 form-group mb-3">
+                        <label className="form-label">Địa chỉ phòng khám</label>
+                        <input className="form-control" />
+                    </div>
+
+                    <div className="col-4 form-group mb-3">
+                        <label className="form-label">Note</label>
+                        <input className="form-control" />
+                    </div>
+                </div>
+
                 <div className="manage-doctor-editor">
                     <MdEditor
                         style={{ height: '320px' }}
@@ -151,7 +193,10 @@ class ManageDoctor extends Component {
                 <button
                     className={hasOldData ? 'save-content-doctor' : 'create-content-doctor'}
                     onClick={() => this.handleSaveContentMardown()}>
-                    {hasOldData ? <span>Lưu thông tin</span> : <span>Tạo thông tin</span>}
+                    {hasOldData ?
+                        <span><FormattedMessage id="admin.manage-doctor.save" /></span>
+                        :
+                        <span><FormattedMessage id="admin.manage-doctor.add" /></span>}
 
                 </button>
             </div>
@@ -162,14 +207,16 @@ class ManageDoctor extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
-        allDoctors: state.admin.allDoctors
+        allDoctors: state.admin.allDoctors,
+        allRequiredDoctorInfo: state.admin.allRequiredDoctorInfo
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         fetchAllDoctors: () => dispatch(actions.fetchAllDoctors()),
-        saveDetailDoctor: (data) => dispatch(actions.saveDetailDoctor(data))
+        saveDetailDoctor: (data) => dispatch(actions.saveDetailDoctor(data)),
+        getAllRequiredDoctorInfo: () => dispatch(actions.getRequiredDoctorInfo())
     };
 };
 

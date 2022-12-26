@@ -120,17 +120,28 @@ class DoctorSchedule extends Component {
 
                     <div className="time-content">
                         {allAvailabelTime && allAvailabelTime.length > 0 ?
-                            allAvailabelTime.map((item, index) => {
-                                let timeDisplay = language === LANGUAGES.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn
-                                return (
-                                    <button
-                                        key={index}
-                                        className={language === LANGUAGES.VI ? 'btn-vi' : 'btn-en'}
-                                    >
-                                        {timeDisplay}
-                                    </button>
-                                )
-                            })
+                            <>
+                                <div className="time-content-btn">
+                                    {allAvailabelTime.map((item, index) => {
+                                        let timeDisplay = language === LANGUAGES.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn
+                                        return (
+                                            <button
+                                                key={index}
+                                                className={language === LANGUAGES.VI ? 'btn-vi' : 'btn-en'}
+                                            >
+                                                {timeDisplay}
+                                            </button>
+                                        )
+                                    })}
+                                </div>
+                                <div className="book-free">
+                                    <span>
+                                        <FormattedMessage id="patient.detail-doctor.choose" />
+                                        <i class="fas fa-hand-point-up"></i>
+                                        <FormattedMessage id="patient.detail-doctor.book-free" />
+                                    </span>
+                                </div>
+                            </>
                             :
                             <div className="no-schedule"><FormattedMessage id="patient.detail-doctor.no-schedule" /></div>
                         }
