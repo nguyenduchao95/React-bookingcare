@@ -1,0 +1,83 @@
+.doctor-extra-info-container {
+    padding-left: 15px;
+    border-left: 1px solid green;
+    margin-bottom: 10px;
+
+    .content-up {
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+
+        .text-address {
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #333;
+        }
+
+        .name-clinic {
+            font-weight: 600;
+            padding: 3px 0;
+        }
+    }
+
+    .content-down {
+        .short-info {
+            padding: 10px 0;
+
+            .short-info-title {
+                font-size: 15px;
+                font-weight: 600;
+                text-transform: uppercase;
+                color: #333;
+            }
+
+            .show-info {
+                color: rgb(3, 159, 159);
+                padding-left: 5px;
+                cursor: pointer;
+            }
+        }
+
+        .title-price {
+            padding: 10px 0;
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #333;
+        }
+
+        .detail-info {
+            border: 1px solid #ccc;
+            background-color: rgb(247, 246, 246);
+
+            .price {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 2px 3px 0;
+                font-size: 15px;
+            }
+
+            .note {
+                padding: 0 3px;
+                font-size: 13px;
+                color: rgb(91, 91, 91);
+                padding-bottom: 3px;
+            }
+
+            .payment {
+                padding: 5px 3px;
+                background-color: rgb(228, 226, 226);
+                border-top: 1px solid #ccc;
+            }
+        }
+
+        .hide-info {
+            color: rgb(3, 159, 159);
+            padding-left: 5px;
+            cursor: pointer;
+            padding: 10px 3px;
+            display: inline-block;
+        }
+    }
+}
