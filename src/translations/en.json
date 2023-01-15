@@ -74,6 +74,13 @@
             "no-schedule": "The doctor does not have an appointment. Please choose another time",
             "choose": "Choose",
             "book-free": "and book (free)"
+        },
+        "extra-info-doctor": {
+            "text-address": "Address of examination",
+            "price": "Price",
+            "detail": "See details",
+            "hide-price": "Hide price list",
+            "payment": "The clinic has payment in the form of cash and swipe card"
         }
     },
     "admin": {

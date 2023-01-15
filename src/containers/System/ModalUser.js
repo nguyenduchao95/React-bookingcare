@@ -68,7 +68,7 @@ class ModalUser extends Component {
                 isOpen={isOpen}
                 modalTransition={{ timeout: 200 }}
                 backdropTransition={{ timeout: 200 }}
-                toggle={() => this.toggle()} className="abcdef"
+                toggle={() => this.toggle()}
                 size="lg"
                 centered
             >

@@ -1,21 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import './DoctorExtraInfo.scss'
-import * as actions from '../../../store/actions';
+import { getExtraInfoDoctorById } from '../../../services/userService';
+import NumberFormat from 'react-number-format';
+import { LANGUAGES } from '../../../utils';
+import { FormattedMessage } from 'react-intl';
 
 class DoctorExtraInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isShowDetailInfo: false
+            isShowDetailInfo: false,
+            extraInfo: {}
         }
     }
 
     componentDidMount() {
     }
 
-    componentDidUpdate(preProps, preState, snapshot) {
+    async componentDidUpdate(preProps, preState, snapshot) {
+        if (this.props.language !== preProps.language) {
 
+        }
+
+        if (this.props.doctorId !== preProps.doctorId) {
+            let res = await getExtraInfoDoctorById(this.props.doctorId)
+            if (res && res.errCode === 0) {
+                this.setState({
+                    extraInfo: res.data
+                })
+            }
+        }
     }
 
     showHideDetailInfo = () => {
@@ -25,36 +40,59 @@ class DoctorExtraInfo extends Component {
     }
 
     render() {
-        let { isShowDetailInfo } = this.state
+        let { isShowDetailInfo, extraInfo } = this.state
+        let { language } = this.props
         return (
             <div className="doctor-extra-info-container">
                 <div className="content-up">
-                    <div className="text-address">Dia chi pk</div>
-                    <div className="name-clinic">PK chuyen khoa</div>
-                    <div className="detail-clinic">Dia chi</div>
+                    <div className="text-address"><FormattedMessage id="patient.extra-info-doctor.text-address" /></div>
+                    <div className="name-clinic">
+                        {extraInfo && extraInfo.nameClinic ? extraInfo.nameClinic : ''}
+                    </div>
+                    <div className="detail-clinic">
+                        {extraInfo && extraInfo.addressClinic ? extraInfo.addressClinic : ''}
+                    </div>
                 </div>
 
                 <div className="content-down">
                     {isShowDetailInfo === false ?
                         <div className="short-info">
-                            <span className="short-info-title">Giá khám: </span>250K.
-                            <span className="show-info" onClick={() => this.showHideDetailInfo()}>Xem thêm chi tiết</span>
+                            <span className="short-info-title"><FormattedMessage id="patient.extra-info-doctor.price" />: </span>
+                            {extraInfo && extraInfo.priceTypeData ?
+                                <NumberFormat
+                                    value={language === LANGUAGES.VI ? extraInfo.priceTypeData.valueVi : extraInfo.priceTypeData.valueEn}
+                                    displayType={'text'}
+                                    thousandSeparator={true}
+                                    suffix={language === LANGUAGES.VI ? 'VND' : '$'}
+                                />
+                                : ''
+                            }
+                            <span className="show-info" onClick={() => this.showHideDetailInfo()}><FormattedMessage id="patient.extra-info-doctor.detail" /></span>
                         </div>
                         :
                         <>
-                            <div className="title-price">Giá khám:</div>
+                            <div className="title-price"><FormattedMessage id="patient.extra-info-doctor.price" />:</div>
                             <div className="detail-info">
                                 <div className="price">
-                                    <span>Giá khám</span>
-                                    <span>250K - 350K</span>
+                                    <span><FormattedMessage id="patient.extra-info-doctor.price" /></span>
+                                    <span>
+                                        {extraInfo && extraInfo.priceTypeData ?
+                                            <NumberFormat
+                                                value={language === LANGUAGES.VI ? extraInfo.priceTypeData.valueVi : extraInfo.priceTypeData.valueEn}
+                                                displayType={'text'}
+                                                thousandSeparator={true}
+                                                suffix={language === LANGUAGES.VI ? 'VND' : '$'}
+                                            />
+                                            : ''
+                                        }
+                                    </span>
                                 </div>
                                 <div className="note">
-                                    <div>Giá tư vấn 15 phút: 250.000vnđ</div>
-                                    <div>Giá tư vấn 30 phút: 500.000vnđ</div>
+                                    {extraInfo && extraInfo.note ? extraInfo.note : ''}
                                 </div>
-                                <div className="payment">Phòng khám có thanh toán bằng hình thức tiền mặt và quẹt thẻ</div>
+                                <div className="payment"><FormattedMessage id="patient.extra-info-doctor.payment" /></div>
                             </div>
-                            <div className="hide-info" onClick={() => this.showHideDetailInfo()}>Ẩn bảng giá</div>
+                            <div className="hide-info" onClick={() => this.showHideDetailInfo()}><FormattedMessage id="patient.extra-info-doctor.hide-price" /></div>
                         </>
                     }
                 </div>
@@ -65,16 +103,12 @@ class DoctorExtraInfo extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
-
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchAllDoctors: () => dispatch(actions.fetchAllDoctors()),
-        fetchAllScheduleTime: () => dispatch(actions.fetchAllScheduleTime())
     };
 };
 
